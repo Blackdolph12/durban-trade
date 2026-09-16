@@ -3,90 +3,91 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Durban Trade - Deposit</title>
+<title>Durban Trade - Secure Deposit</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<style>
-body{font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-</style>
 </head>
-<body class="bg-gray-50 min-h-screen">
-<header class="bg-black text-white p-4 flex justify-between items-center">
-<h1 class="font-bold text-lg">DURBAN TRADE</h1>
-<span class="bg-green-500 text-xs px-2 py-1 rounded">SECURE</span>
-</header>
+<body class="bg-[#0a0a0a] min-h-screen text-white">
+<div class="bg-gradient-to-r from-yellow-500 to-amber-600 p-[1px]">
+<div class="bg-black p-4 flex justify-between items-center">
+<h1 class="font-black tracking-widest">DURBAN TRADE</h1>
+<span class="bg-green-500 text-black text-[10px] px-3 py-1 rounded-full font-bold">● LIVE & SECURE</span>
+</div>
+</div>
 
 <div class="max-w-md mx-auto p-4">
-<div class="bg-white rounded-2xl shadow-lg p-6 mt-4">
-<h2 class="text-2xl font-bold text-center">Make Deposit</h2>
-<p class="text-center text-gray-500 text-sm mt-1">Fast & Secure Deposit to Durban Trade</p>
+<div class="bg-white text-black rounded-[24px] p-6 mt-4 shadow-2xl">
+<div class="text-center">
+<h2 class="text-3xl font-black">Make Deposit</h2>
+<p class="text-gray-500 text-sm mt-1">Funds reflect in 5-30 minutes</p>
+</div>
 
-<div class="mt-6 space-y-4">
-<div>
-<label class="text-sm font-semibold">Select Payment Method</label>
+<div class="mt-6">
+<p class="font-bold text-sm">Choose Method</p>
 <div class="grid grid-cols-2 gap-2 mt-2">
-<button onclick="setMethod('Capitec')" class="method-btn border-2 border-green-500 bg-green-50 p-3 rounded-xl text-sm font-bold">Capitec Pay</button>
-<button onclick="setMethod('EFT')" class="method-btn border p-3 rounded-xl text-sm">Bank EFT</button>
-<button onclick="setMethod('USDT')" class="method-btn border p-3 rounded-xl text-sm">USDT</button>
-<button onclick="setMethod('Ozow')" class="method-btn border p-3 rounded-xl text-sm">Ozow</button>
+<button onclick="setM('Capitec Pay')" id="b1" class="m-btn border-2 border-black bg-black text-white p-3 rounded-xl text-sm font-bold">Capitec Pay</button>
+<button onclick="setM('Bank EFT')" id="b2" class="m-btn border p-3 rounded-xl text-sm font-bold">Bank EFT</button>
+<button onclick="setM('USDT TRC20')" id="b3" class="m-btn border p-3 rounded-xl text-sm font-bold">USDT TRC20</button>
+<button onclick="setM('Ozow')" id="b4" class="m-btn border p-3 rounded-xl text-sm font-bold">Ozow Instant</button>
 </div>
 </div>
 
-<div>
-<label class="text-sm font-semibold">Amount (ZAR)</label>
-<input id="amount" type="number" placeholder="e.g. 500" class="w-full mt-2 border-2 p-3 rounded-xl text-lg font-bold" />
+<div class="mt-5">
+<label class="font-bold text-sm">Amount (ZAR)</label>
+<input id="amt" type="number" inputmode="numeric" placeholder="500" class="w-full mt-2 border-2 border-black p-4 rounded-xl text-2xl font-black">
 <div class="grid grid-cols-4 gap-2 mt-2">
-<button onclick="document.getElementById('amount').value=250" class="border p-2 rounded-lg text-sm">R250</button>
-<button onclick="document.getElementById('amount').value=500" class="border p-2 rounded-lg text-sm">R500</button>
-<button onclick="document.getElementById('amount').value=1000" class="border p-2 rounded-lg text-sm">R1000</button>
-<button onclick="document.getElementById('amount').value=5000" class="border p-2 rounded-lg text-sm">R5000</button>
+<button onclick="amt.value=250" class="bg-gray-100 p-2 rounded-xl font-bold">R250</button>
+<button onclick="amt.value=500" class="bg-gray-100 p-2 rounded-xl font-bold">R500</button>
+<button onclick="amt.value=1000" class="bg-gray-100 p-2 rounded-xl font-bold">R1k</button>
+<button onclick="amt.value=5000" class="bg-gray-100 p-2 rounded-xl font-bold">R5k</button>
 </div>
 </div>
 
-<div>
-<label class="text-sm font-semibold">Your Email / Client ID</label>
-<input id="email" type="text" placeholder="your@email.com" class="w-full mt-2 border p-3 rounded-xl" />
+<div class="mt-5">
+<label class="font-bold text-sm">Email / Client ID</label>
+<input id="email" type="text" placeholder="your email" class="w-full mt-2 border p-3 rounded-xl">
 </div>
 
-<div id="bankDetails" class="bg-gray-100 p-4 rounded-xl text-sm">
-<p class="font-bold">Bank Details:</p>
-<p>Bank: Capitec Business</p>
-<p>Account: 123 456 7890</p>
-<p>Reference: Use your email</p>
-<p id="methodText" class="mt-2 text-green-600 font-bold">Method: Capitec Pay</p>
+<div class="mt-5 bg-gray-50 border-dashed border-gray-300 p-4 rounded-xl">
+<p class="font-black text-sm">YOUR PAYMENT DETAILS:</p>
+<p class="text-xs mt-2 text-gray-600">Replace this text with your real bank details after. For now example:</p>
+<p class="text-sm font-bold mt-1">Bank: Capitec<br>Acc: YOUR NUMBER HERE<br>Ref: Use your Email</p>
+<p class="text-xs mt-2 text-gray-500">For USDT: TRC20 Address here</p>
+<p id="sel" class="mt-3 bg-black text-white text-center p-2 rounded-lg text-sm font-bold">Selected: Capitec Pay</p>
 </div>
 
-<button onclick="makeDeposit()" class="w-full bg-black text-white p-4 rounded-xl font-bold text-lg mt-4">DEPOSIT NOW →</button>
+<button onclick="sendWA()" class="w-full bg-[#25D366] text-black p-4 rounded-xl font-black text-lg mt-5 flex justify-center items-center gap-2">💬 SEND PROOF ON WHATSAPP</button>
+<button onclick="deposit()" class="w-full bg-black text-white p-4 rounded-xl font-black text-lg mt-2">CONFIRM DEPOSIT →</button>
 
-<p class="text-xs text-center text-gray-400 mt-3">© 2026 Durban Trade • Support: durbantrade@gmail.com</p>
+<div id="ok" class="hidden mt-4 bg-green-50 border-2 border-green-600 rounded-xl p-4 text-center">
+<h3 class="font-black text-green-700">✅ Ready to Pay!</h3>
+<p id="oktxt" class="text-sm mt-1 text-black"></p>
+<p class="text-xs mt-2 text-gray-600">Tap WhatsApp button above to send proof to Durban Trade</p>
 </div>
 
-<div id="success" class="hidden bg-green-50 border-2 border-green-500 rounded-2xl p-6 mt-4 text-center">
-<h3 class="font-bold text-green-700 text-xl">✓ Deposit Request Created</h3>
-<p class="text-sm mt-2">Amount: <span id="sAmount" class="font-bold"></span></p>
-<p class="text-sm">Please complete payment using the details above. Funds reflect in 5-30 mins.</p>
-<button onclick="document.getElementById('success').classList.add('hidden')" class="mt-3 text-sm underline">Close</button>
-</div>
+<p class="text-[10px] text-center text-gray-400 mt-4">Durban Trade Pty Ltd • Support on WhatsApp: 0817070456 • Durban, SA</p>
 </div>
 </div>
 
 <script>
-let currentMethod='Capitec'
-function setMethod(m){
- currentMethod=m
- document.getElementById('methodText').innerText='Method: '+m
- document.querySelectorAll('.method-btn').forEach(b=>{
-  b.className='method-btn border p-3 rounded-xl text-sm'
-  if(b.innerText.includes(m)) b.className='method-btn border-2 border-green-500 bg-green-50 p-3 rounded-xl text-sm font-bold'
- })
+let method='Capitec Pay'
+const amt=document.getElementById('amt')
+function setM(m){
+ method=m
+ document.getElementById('sel').innerText='Selected: '+m
+ document.querySelectorAll('.m-btn').forEach(b=>b.className='m-btn border p-3 rounded-xl text-sm font-bold')
+ const map={'Capitec Pay':'b1','Bank EFT':'b2','USDT TRC20':'b3','Ozow':'b4'}
+ document.getElementById(map[m]).className='m-btn border-2 border-black bg-black text-white p-3 rounded-xl text-sm font-bold'
 }
-function makeDeposit(){
- const amt=document.getElementById('amount').value
- const email=document.getElementById('email').value
- if(!amt){alert('Enter amount');return}
- if(!email){alert('Enter email');return}
- document.getElementById('sAmount').innerText='R'+amt+' via '+currentMethod
- document.getElementById('success').classList.remove('hidden')
- window.scrollTo(0,document.body.scrollHeight)
+function deposit(){
+ if(!amt.value||!document.getElementById('email').value){alert('Enter amount and email');return}
+ document.getElementById('oktxt').innerText='R'+amt.value+' via '+method+' | Email: '+document.getElementById('email').value
+ document.getElementById('ok').classList.remove('hidden')
+}
+function sendWA(){
+ if(!amt.value){alert('Enter amount first');return}
+ let e=document.getElementById('email').value||'No email'
+ let msg=`Hello Durban Trade 👋%0A%0AI made a deposit:%0A💰 Amount: R${amt.value}%0A🏦 Method: ${method}%0A📧 Email/ID: ${e}%0A%0AHere is my proof of payment 👇`
+ window.open(`https://wa.me/27817070456?text=${msg}`,'_blank')
 }
 </script>
 </body>
