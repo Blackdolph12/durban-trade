@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta name="viewport" content="width=device-width,initial-scale=1"><title>Me & Wife</title><style>body{margin:0;background:#0b141a;color:#fff;font-family:system-ui;display:flex;flex-direction:column;height:100vh}#msgs{flex:1;overflow:auto;padding:15px}.me{background:#005c4b;margin-left:auto;padding:8px 12px;border-radius:8px;margin-bottom:8px;max-width:70%}.her{background:#202c33;padding:8px 12px;border-radius:8px;margin-bottom:8px;max-width:70%}#bar{display:flex;padding:10px;background:#202c33}input{flex:1;border-radius:20px;border:0;padding:10px 15px}button{background:#00a884;border:0;width:44px;height:44px;border-radius:50%;margin-left:8px;color:#fff}</style></head><body><div id="msgs"></div><div id="bar"><input id="t" placeholder="Message my wife..."><button onclick="send()">➤</button></div>
+<script type="module">
+import{initializeApp}from"https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";import{getFirestore,collection,addDoc,query,orderBy,onSnapshot,serverTimestamp}from"https://www.gstatic.com/firebasejs/10.4.0/firebase-firestore.js";
+const cfg={apiKey:"AIzaSy...",authDomain:"blessing-trading.firebaseapp.com",projectId:"blessing-trading",appId:"1:..."};
+const app=initializeApp(cfg);const db=getFirestore(app);
+const q=query(collection(db,"wife-chat"),orderBy("time"));
+onSnapshot(q,s=>{msgs.innerHTML="";s.forEach(d=>{let m=d.data();msgs.innerHTML+=`<div class="${m.from=='me'?'me':'her'}">${m.text}</div>`});msgs.scrollTop=msgs.scrollHeight});
+window.send=async()=>{if(!t.value)return;await addDoc(collection(db,"wife-chat"),{from:"me",text:t.value,time:serverTimestamp()});t.value=""}
+</script></body></html>
