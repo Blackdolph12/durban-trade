@@ -1,77 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Fati 💖 Love Chat</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>Fati 💚 WhatsApp</title>
 <script src="https://unpkg.com/peerjs@1.5.3/dist/peerjs.min.js"></script>
 <style>
-body{margin:0;font-family:Arial;background:#0f172a;color:white;text-align:center}
-.header{background:#1e293b;padding:15px}
-.header h1{margin:0;color:#fb7185}
-.card{background:white;color:#0f172a;margin:15px;border-radius:20px;padding:20px;max-width:420px;margin-left:auto;margin-right:auto}
-#msgs{height:320px;overflow-y:auto;background:#f8fafc;border-radius:15px;padding:10px;text-align:left}
-.m{padding:10px 14px;border-radius:18px;margin:6px 0;max-width:75%;word-wrap:break-word;display:inline-block;clear:both}
-.me{background:#22c55e;color:white;float:right}
-.you{background:#e2e8f0;float:left}
-input{width:75%;padding:12px;border-radius:20px;border:1px solid #ddd}
-#sendBtn{width:20%;padding:12px;border-radius:20px;border:none;background:#fb7185;color:white;font-weight:bold}
-.status{font-size:13px;color:#22c55e;margin:5px}
+*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Segoe UI,Roboto}
+body{background:#111b21;height:100dvh;display:flex;flex-direction:column}
+.wa-header{background:#202c33;padding:10px 12px;display:flex;align-items:center;color:white;gap:10px}
+.avatar{width:40px;height:40px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.wa-header .name{font-weight:600;font-size:17px}
+.wa-header .online{font-size:12px;color:#8696a0}
+.wa-bg{flex:1;background:#0b141a url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-size:300px;position:relative;display:flex;flex-direction:column}
+#setup{margin:auto;background:#202c33;color:white;padding:22px;border-radius:12px;width:90%;max-width:340px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.5)}
+#setup b{background:#111b21;padding:6px 10px;border-radius:8px;border:1px solid #2a3942}
+.btn{width:100%;padding:13px;border:none;border-radius:25px;font-weight:700;margin-top:10px;font-size:14px}
+.btn-host{background:#00a884;color:white}
+.btn-join{background:#202c33;color:#00a884;border:1px solid #2a3942}
+#chatWrap{display:none;flex:1;flex-direction:column;overflow:hidden}
+#msgs{flex:1;overflow-y:auto;padding:12px 8px;display:flex;flex-direction:column;gap:2px}
+.bubble{max-width:75%;padding:7px 8px 4px 9px;border-radius:7.5px;font-size:14.5px;line-height:19px;position:relative;box-shadow:0 1px 0.5px rgba(0,0,0,.13);word-wrap:break-word}
+.me{align-self:flex-end;background:#005c4b;color:#e9edef;border-top-right-radius:0}
+.you{align-self:flex-start;background:#202c33;color:#e9edef;border-top-left-radius:0}
+.meta{font-size:11px;color:#8696a0;text-align:right;margin-top:3px;display:flex;justify-content:flex-end;gap:3px;align-items:center}
+.tick{color:#53bdeb}
+.input-bar{background:#202c33;padding:6px 8px;display:flex;align-items:center;gap:8px}
+.input-bar input{flex:1;background:#2a3942;border:none;border-radius:20px;padding:11px 14px;color:white;outline:none;font-size:15px}
+.icon-btn{width:42px;height:42px;border-radius:50%;background:#00a884;border:none;color:white;font-size:20px;display:flex;align-items:center;justify-content:center}
 </style>
 </head>
 <body>
-<div class="header"><h1>Blessing ❤️ Fati</h1><small>Private • No Card • P2P</small></div>
-
-<div class="card" id="setup">
-<h3>Your Private Room</h3>
-<p>ID: <b style="background:#ffe4e6;padding:5px 10px;border-radius:10px">fati-blessing-1000</b></p>
-<p style="font-size:13px;color:#666">Both open same link. One clicks HOST, other clicks JOIN.</p>
-<button onclick="host()" style="width:90%;padding:14px;background:#22c55e;color:white;border:none;border-radius:12px;font-weight:bold;margin:5px">I AM HOST (Blessing)</button>
-<button onclick="join()" style="width:90%;padding:14px;background:#fb7185;color:white;border:none;border-radius:12px;font-weight:bold;margin:5px">I AM JOINING (Fati)</button>
-<p id="info" style="font-size:12px;color:green"></p>
+<div class="wa-header">
+<div class="avatar">F</div>
+<div><div class="name">Fati ❤️</div><div class="online" id="online">tap HOST / JOIN to connect</div></div>
+<div style="margin-left:auto">📞 🎥</div>
 </div>
-
-<div class="card" id="chat" style="display:none">
-<div class="status" id="stat">● Connected</div>
+<div class="wa-bg">
+<div id="setup">
+<h3 style="margin-bottom:10px">Private Encrypted Chat</h3>
+<p style="font-size:13px;color:#8696a0;margin-bottom:12px">End-to-end P2P • No card • No server</p>
+<p style="margin-bottom:12px">Room ID: <b>fati-blessing-1000</b></p>
+<button class="btn btn-host" onclick="host()">I AM HOST - Blessing</button>
+<button class="btn btn-join" onclick="join()">I AM JOINING - Fati</button>
+<p id="info" style="font-size:11px;color:#00a884;margin-top:10px"></p>
+</div>
+<div id="chatWrap">
 <div id="msgs"></div>
-<div style="display:flex;gap:5px;margin-top:10px">
-<input id="t" placeholder="Type love message...">
-<button id="sendBtn" onclick="sendM()">Send</button>
+<div class="input-bar">
+<input id="t" placeholder="Message" onkeypress="if(event.key==='Enter')sendM()">
+<button class="icon-btn" onclick="sendM()">➤</button>
 </div>
 </div>
-
+</div>
 <script>
-const ROOM = "fati-blessing-1000-love-v2";
-let peer, conn;
-function add(txt, cls){
-  let d=document.createElement('div');d.style.clear='both';
-  let m=document.createElement('div');m.className='m '+cls;m.innerText=txt;
-  d.appendChild(m);document.getElementById('msgs').appendChild(d);
-  document.getElementById('msgs').scrollTop=99999;
-}
-function host(){
-  peer=new Peer(ROOM);
-  document.getElementById('info').innerText="Hosting... Tell Fati to click JOIN now";
-  peer.on('connection', c=>{
-    conn=c; showChat();
-    c.on('data', d=>add(d,'you'));
-  });
-}
-function join(){
-  peer=new Peer();
-  peer.on('open', ()=>{
-    conn=peer.connect(ROOM);
-    conn.on('open', showChat);
-    conn.on('data', d=>add(d,'you'));
-  });
+const ROOM="fati-blessing-1000-wa-v3";
+let peer,conn;
+const msgsEl=document.getElementById('msgs');
+function saveHistory(t,c){let h=JSON.parse(localStorage.getItem('wa-h')||'[]');h.push({t,c,time:Date.now()});localStorage.setItem('wa-h',JSON.stringify(h.slice(-200)))}
+function loadHistory(){(JSON.parse(localStorage.getItem('wa-h')||'[]')).forEach(o=>add(o.t,o.c,o.time))}
+function add(txt,cls,ts=Date.now()){
+ let wrap=document.createElement('div');wrap.className='bubble '+cls;
+ let time=new Date(ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
+ wrap.innerHTML=`${txt}<div class=meta>${time} <span class=tick>${cls=='me'?'✓✓':''}</span></div>`;
+ msgsEl.appendChild(wrap); msgsEl.scrollTop=msgsEl.scrollHeight; saveHistory(txt,cls);
 }
 function showChat(){
-  document.getElementById('setup').style.display='none';
-  document.getElementById('chat').style.display='block';
-  add('Connected! Start chatting 💕','you');
+ document.getElementById('setup').style.display='none';
+ document.getElementById('chatWrap').style.display='flex';
+ document.getElementById('online').innerText='online • encrypted';
+ loadHistory(); if(msgsEl.children.length==0) add('Hi Fati ❤️ Chat is secure and private','you');
+}
+function host(){
+ document.getElementById('info').innerText='Hosting... Tell Fati to tap JOIN now';
+ peer=new Peer(ROOM); peer.on('connection',c=>{conn=c; showChat(); c.on('data',d=>add(d,'you'));});
+ peer.on('error',()=>join());
+}
+function join(){
+ document.getElementById('info').innerText='Connecting...';
+ peer=new Peer(); peer.on('open',()=>{
+  conn=peer.connect(ROOM); conn.on('open',showChat);
+  conn.on('data',d=>add(d,'you'));
+ });
 }
 function sendM(){
-  let i=document.getElementById('t'); if(!i.value||!conn) return;
-  add(i.value,'me'); conn.send(i.value); i.value='';
+ let i=document.getElementById('t'); if(!i.value.trim()||!conn) return;
+ add(i.value,'me'); conn.send(i.value); i.value='';
+ try{new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_6d6a3a1ac0.mp3').play().catch(()=>{})}catch(e){}
 }
 </script>
 </body>
