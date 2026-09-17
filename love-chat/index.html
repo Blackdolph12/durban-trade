@@ -2,47 +2,51 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>Fati 💚 WhatsApp</title>
+<title>Moise Disasi 💚 Private</title>
 <script src="https://unpkg.com/peerjs@1.5.3/dist/peerjs.min.js"></script>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:-apple-system,Segoe UI,Roboto}
+*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#111b21;height:100dvh;display:flex;flex-direction:column}
 .wa-header{background:#202c33;padding:10px 12px;display:flex;align-items:center;color:white;gap:10px}
 .avatar{width:40px;height:40px;border-radius:50%;background:#00a884;display:flex;align-items:center;justify-content:center;font-weight:bold}
-.wa-header .name{font-weight:600;font-size:17px}
-.wa-header .online{font-size:12px;color:#8696a0}
-.wa-bg{flex:1;background:#0b141a url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-size:300px;position:relative;display:flex;flex-direction:column}
-#setup{margin:auto;background:#202c33;color:white;padding:22px;border-radius:12px;width:90%;max-width:340px;text-align:center;box-shadow:0 4px 20px rgba(0,0,0,.5)}
-#setup b{background:#111b21;padding:6px 10px;border-radius:8px;border:1px solid #2a3942}
-.btn{width:100%;padding:13px;border:none;border-radius:25px;font-weight:700;margin-top:10px;font-size:14px}
+.call-btn{font-size:22px;padding:6px 10px;cursor:pointer}
+.wa-bg{flex:1;background:#0b141a url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-size:280px;display:flex;flex-direction:column}
+#setup{margin:auto;background:#202c33;color:white;padding:22px;border-radius:12px;width:90%;max-width:340px;text-align:center}
+.btn{width:100%;padding:13px;border:none;border-radius:25px;font-weight:700;margin-top:10px}
 .btn-host{background:#00a884;color:white}
-.btn-join{background:#202c33;color:#00a884;border:1px solid #2a3942}
+.btn-join{background:#2a3942;color:#00a884;border:1px solid #333}
 #chatWrap{display:none;flex:1;flex-direction:column;overflow:hidden}
-#msgs{flex:1;overflow-y:auto;padding:12px 8px;display:flex;flex-direction:column;gap:2px}
-.bubble{max-width:75%;padding:7px 8px 4px 9px;border-radius:7.5px;font-size:14.5px;line-height:19px;position:relative;box-shadow:0 1px 0.5px rgba(0,0,0,.13);word-wrap:break-word}
+#msgs{flex:1;overflow-y:auto;padding:12px 8px;display:flex;flex-direction:column;gap:3px}
+.bubble{max-width:75%;padding:7px 9px 4px;border-radius:7.5px;font-size:14.5px;box-shadow:0 1px .5px rgba(0,0,0,.2)}
 .me{align-self:flex-end;background:#005c4b;color:#e9edef;border-top-right-radius:0}
 .you{align-self:flex-start;background:#202c33;color:#e9edef;border-top-left-radius:0}
-.meta{font-size:11px;color:#8696a0;text-align:right;margin-top:3px;display:flex;justify-content:flex-end;gap:3px;align-items:center}
-.tick{color:#53bdeb}
-.input-bar{background:#202c33;padding:6px 8px;display:flex;align-items:center;gap:8px}
-.input-bar input{flex:1;background:#2a3942;border:none;border-radius:20px;padding:11px 14px;color:white;outline:none;font-size:15px}
-.icon-btn{width:42px;height:42px;border-radius:50%;background:#00a884;border:none;color:white;font-size:20px;display:flex;align-items:center;justify-content:center}
+.meta{font-size:11px;color:#8696a0;text-align:right;margin-top:3px}
+.input-bar{background:#202c33;padding:6px 8px;display:flex;gap:8px}
+.input-bar input{flex:1;background:#2a3942;border:none;border-radius:20px;padding:11px 14px;color:white;outline:none}
+.icon-btn{width:42px;height:42px;border-radius:50%;background:#00a884;border:none;color:white;font-size:20px}
+#callScreen{display:none;position:fixed;inset:0;background:#0b141a;z-index:99;flex-direction:column;align-items:center;justify-content:center;color:white}
+#remoteVideo{width:100%;height:100%;object-fit:cover}
+#localVideo{position:absolute;width:100px;height:140px;bottom:90px;right:15px;border-radius:12px;border:2px solid #00a884;background:black}
 </style>
 </head>
 <body>
 <div class="wa-header">
-<div class="avatar">F</div>
-<div><div class="name">Fati ❤️</div><div class="online" id="online">tap HOST / JOIN to connect</div></div>
-<div style="margin-left:auto">📞 🎥</div>
+<div class="avatar">M</div>
+<div><div style="font-weight:600">Moise Disasi ❤️</div><div style="font-size:12px;color:#8696a0" id="online">tap HOST/JOIN to connect</div></div>
+<div style="margin-left:auto;display:flex">
+<div class="call-btn" onclick="makeCall(false)">📞</div>
+<div class="call-btn" onclick="makeCall(true)">🎥</div>
 </div>
+</div>
+
 <div class="wa-bg">
 <div id="setup">
-<h3 style="margin-bottom:10px">Private Encrypted Chat</h3>
-<p style="font-size:13px;color:#8696a0;margin-bottom:12px">End-to-end P2P • No card • No server</p>
-<p style="margin-bottom:12px">Room ID: <b>fati-blessing-1000</b></p>
-<button class="btn btn-host" onclick="host()">I AM HOST - Blessing</button>
-<button class="btn btn-join" onclick="join()">I AM JOINING - Fati</button>
-<p id="info" style="font-size:11px;color:#00a884;margin-top:10px"></p>
+<h3>Private Encrypted Chat</h3>
+<p style="font-size:12px;color:#8696a0;margin:8px 0">Voice + Video • P2P • No card</p>
+<p style="margin:10px 0">Room: <b style="background:#111b21;padding:5px 8px;border-radius:6px">moise-disasi-private</b></p>
+<button class="btn btn-host" onclick="host()">HOST - Moise Disasi</button>
+<button class="btn btn-join" onclick="join()">JOIN - Connect</button>
+<p id="info" style="font-size:11px;color:#00a884;margin-top:8px"></p>
 </div>
 <div id="chatWrap">
 <div id="msgs"></div>
@@ -52,40 +56,61 @@ body{background:#111b21;height:100dvh;display:flex;flex-direction:column}
 </div>
 </div>
 </div>
+
+<div id="callScreen">
+<video id="remoteVideo" autoplay playsinline></video>
+<video id="localVideo" autoplay muted playsinline></video>
+<div style="position:absolute;top:20px">Moise Disasi</div>
+<div style="position:absolute;bottom:20px;display:flex;gap:20px">
+<button onclick="endCall()" style="background:#f15c6d;border:none;width:60px;height:60px;border-radius:50%;font-size:24px">📵</button>
+</div>
+</div>
+
 <script>
-const ROOM="fati-blessing-1000-wa-v3";
-let peer,conn;
-const msgsEl=document.getElementById('msgs');
-function saveHistory(t,c){let h=JSON.parse(localStorage.getItem('wa-h')||'[]');h.push({t,c,time:Date.now()});localStorage.setItem('wa-h',JSON.stringify(h.slice(-200)))}
-function loadHistory(){(JSON.parse(localStorage.getItem('wa-h')||'[]')).forEach(o=>add(o.t,o.c,o.time))}
-function add(txt,cls,ts=Date.now()){
- let wrap=document.createElement('div');wrap.className='bubble '+cls;
- let time=new Date(ts).toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
- wrap.innerHTML=`${txt}<div class=meta>${time} <span class=tick>${cls=='me'?'✓✓':''}</span></div>`;
- msgsEl.appendChild(wrap); msgsEl.scrollTop=msgsEl.scrollHeight; saveHistory(txt,cls);
-}
-function showChat(){
- document.getElementById('setup').style.display='none';
- document.getElementById('chatWrap').style.display='flex';
- document.getElementById('online').innerText='online • encrypted';
- loadHistory(); if(msgsEl.children.length==0) add('Hi Fati ❤️ Chat is secure and private','you');
-}
+const ROOM="moise-disasi-private-v4";
+let peer,conn,localStream,currentCall;
+function add(txt,cls){let d=document.createElement('div');d.className='bubble '+cls;d.innerHTML=txt+`<div class=meta>${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} ✓✓</div>`;document.getElementById('msgs').appendChild(d);document.getElementById('msgs').scrollTop=9999;}
+function showChat(){document.getElementById('setup').style.display='none';document.getElementById('chatWrap').style.display='flex';document.getElementById('online').innerText='online • Moise Disasi';}
 function host(){
- document.getElementById('info').innerText='Hosting... Tell Fati to tap JOIN now';
- peer=new Peer(ROOM); peer.on('connection',c=>{conn=c; showChat(); c.on('data',d=>add(d,'you'));});
- peer.on('error',()=>join());
-}
-function join(){
- document.getElementById('info').innerText='Connecting...';
- peer=new Peer(); peer.on('open',()=>{
-  conn=peer.connect(ROOM); conn.on('open',showChat);
-  conn.on('data',d=>add(d,'you'));
+ document.getElementById('info').innerText='Hosting as Moise... tell partner to JOIN';
+ peer=new Peer(ROOM);
+ peer.on('connection',c=>{conn=c;showChat();c.on('data',d=>add(d,'you'));});
+ peer.on('call',async call=>{
+   let stream=await navigator.mediaDevices.getUserMedia({video:call.metadata.video,audio:true});
+   call.answer(stream); handleCall(call,stream);
  });
 }
-function sendM(){
- let i=document.getElementById('t'); if(!i.value.trim()||!conn) return;
- add(i.value,'me'); conn.send(i.value); i.value='';
- try{new Audio('https://cdn.pixabay.com/audio/2022/03/10/audio_6d6a3a1ac0.mp3').play().catch(()=>{})}catch(e){}
+function join(){
+ document.getElementById('info').innerText='Connecting to Moise...';
+ peer=new Peer();
+ peer.on('open',()=>{
+  conn=peer.connect(ROOM);
+  conn.on('open',showChat); conn.on('data',d=>add(d,'you'));
+ });
+ peer.on('call',async call=>{
+   let stream=await navigator.mediaDevices.getUserMedia({video:call.metadata.video,audio:true});
+   call.answer(stream); handleCall(call,stream);
+ });
+}
+function sendM(){let i=document.getElementById('t');if(!i.value||!conn)return;add(i.value,'me');conn.send(i.value);i.value='';}
+async function makeCall(isVideo){
+ if(!peer) return alert('First tap HOST or JOIN');
+ try{
+  localStream=await navigator.mediaDevices.getUserMedia({video:isVideo,audio:true});
+  let call=peer.call(ROOM,localStream,{metadata:{video:isVideo}});
+  handleCall(call,localStream);
+ }catch(e){alert('Allow camera/mic: '+e.message)}
+}
+function handleCall(call,stream){
+ currentCall=call; document.getElementById('callScreen').style.display='flex';
+ document.getElementById('localVideo').srcObject=stream;
+ call.on('stream',remote=>{document.getElementById('remoteVideo').srcObject=remote;});
+ call.on('close',endCall);
+}
+function endCall(){
+ document.getElementById('callScreen').style.display='none';
+ if(currentCall) currentCall.close();
+ if(localStream) localStream.getTracks().forEach(t=>t.stop());
 }
 </script>
 </body>
