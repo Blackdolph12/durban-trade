@@ -2,54 +2,53 @@
 <html>
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Moise Disasi ❤️</title>
 <script src="https://unpkg.com/peerjs@1.5.3/dist/peerjs.min.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:system-ui}
 body{background:#111b21;height:100dvh;display:flex;flex-direction:column}
 .wa-header{background:#202c33;height:62px;display:flex;align-items:center;padding:0 12px;gap:10px;color:white}
-.avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;flex-shrink:0;border:2px solid #00a884;background:#2a3942}
+.avatar{width:44px;height:44px;border-radius:50%;overflow:hidden;border:2px solid #00a884;background:#2a3942;flex-shrink:0}
 .avatar img{width:100%;height:100%;object-fit:cover}
-.wa-bg{flex:1;background:#0b141a url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-size:280px;display:flex;flex-direction:column}
-#setup{margin:auto;background:#202c33;color:white;padding:22px;border-radius:12px;width:88%;max-width:330px;text-align:center}
-.btn{width:100%;padding:13px;border:none;border-radius:25px;font-weight:700;margin-top:10px}
-.btn-host{background:#00a884;color:white} .btn-join{background:#2a3942;color:#00a884;border:1px solid #333}
-#chatWrap{display:none;flex:1;flex-direction:column} #msgs{flex:1;overflow-y:auto;padding:12px 10px;display:flex;flex-direction:column;gap:4px}
-.bubble{max-width:75%;padding:7px 9px 3px;border-radius:8px;font-size:14.5px} .me{align-self:flex-end;background:#005c4b;color:#e9edef} .you{align-self:flex-start;background:#202c33;color:#e9edef}
-.input-bar{background:#202c33;padding:6px 8px;display:flex;gap:8px} .input-bar input{flex:1;background:#2a3942;border:none;border-radius:20px;padding:11px 14px;color:white;outline:none}
-.icon-btn{width:42px;height:42px;border-radius:50%;background:#00a884;border:none;color:white}
-#callScreen{display:none;position:fixed;inset:0;background:#0b141a;z-index:99} #remoteVideo{width:100%;height:100%;object-fit:cover} #localVideo{position:absolute;width:90px;height:130px;bottom:90px;right:15px;border-radius:12px;border:2px solid #00a884;background:black}
+.wa-bg{flex:1;background:#efe7dd url('https://user-images.githubusercontent.com/15075759/28719144-86dc0f70-73b1-11e7-911d-60d70fcded21.png');background-size:300px;display:flex;flex-direction:column}
+#setup{margin:auto;background:#202c33;color:white;padding:20px;border-radius:12px;width:88%;max-width:320px;text-align:center}
+.btn{width:100%;padding:12px;border:none;border-radius:25px;font-weight:700;margin-top:10px}
+.btn-host{background:#00a884;color:white}.btn-join{background:#2a3942;color:#00a884;border:1px solid #444}
+#chatWrap{display:none;flex:1;flex-direction:column}
+#msgs{flex:1;overflow-y:auto;padding:10px;display:flex;flex-direction:column;gap:5px}
+.bubble{max-width:75%;padding:8px 10px;border-radius:8px;font-size:15px}
+.me{align-self:flex-end;background:#005c4b;color:white;border-radius:8px 0 8px 8px}
+.you{align-self:flex-start;background:#202c33;color:white;border-radius:0 8px 8px 8px}
+.bar{background:#202c33;padding:6px 8px;display:flex;gap:8px}
+.bar input{flex:1;background:#2a3942;border:none;border-radius:20px;padding:11px 14px;color:white;outline:none}
+.send{width:42px;height:42px;border-radius:50%;background:#00a884;border:none;color:white}
 </style>
 </head>
 <body>
 <div class="wa-header">
 <div class="avatar"><img src="profile.jpg"></div>
 <div><div style="font-weight:600">Moise Disasi ❤️</div><div style="font-size:12px;color:#8696a0">online</div></div>
-<div style="margin-left:auto;display:flex;gap:20px;font-size:22px"><span onclick="makeCall(false)">📞</span><span onclick="makeCall(true)">📹</span></div>
+<div style="margin-left:auto;display:flex;gap:18px;font-size:20px">📞 📹</div>
 </div>
 <div class="wa-bg">
 <div id="setup">
 <div class="avatar" style="width:90px;height:90px;margin:0 auto 12px;border:3px solid #00a884"><img src="profile.jpg"></div>
-<h3>Moise Disasi ❤️</h3>
-<p style="font-size:12px;color:#8696a0;margin-bottom:12px">Private Encrypted Chat</p>
+<h3>Private Chat</h3>
+<p style="font-size:12px;color:#8696a0;margin:8px 0">Encrypted</p>
 <button class="btn btn-host" onclick="host()">HOST - Moise</button>
 <button class="btn btn-join" onclick="join()">JOIN</button>
-<p id="info" style="font-size:11px;color:#00a884;margin-top:10px"></p>
+<p id="info" style="font-size:11px;color:#00a884;margin-top:8px"></p>
 </div>
-<div id="chatWrap"><div id="msgs"></div><div class="input-bar"><input id="t" placeholder="Type a message"><button class="icon-btn" onclick="sendM()">➤</button></div></div>
+<div id="chatWrap"><div id="msgs"></div><div class="bar"><input id="t" placeholder="Type a message"><button class="send" onclick="sendM()">➤</button></div></div>
 </div>
-<div id="callScreen"><video id="remoteVideo" autoplay playsinline></video><video id="localVideo" autoplay muted playsinline></video><div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%)"><button onclick="endCall()" style="background:#f15c6d;border:none;width:60px;height:60px;border-radius:50%">📵</button></div></div>
 <script>
-const ROOM="moise-disasi-private-v4";let peer,conn,localStream,currentCall;
-function add(t,c){let d=document.createElement('div');d.className='bubble '+c;d.innerHTML=t+`<div style="font-size:10px;color:#8696a0;text-align:right">${new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})} ✓✓</div>`;document.getElementById('msgs').appendChild(d);document.getElementById('msgs').scrollTop=999999;}
-function showChat(){document.getElementById('setup').style.display='none';document.getElementById('chatWrap').style.display='flex';}
-function host(){document.getElementById('info').innerText='Hosting...';peer=new Peer(ROOM);peer.on('connection',c=>{conn=c;showChat();c.on('data',d=>add(d,'you'));});peer.on('call',async call=>{let s=await navigator.mediaDevices.getUserMedia({video:call.metadata.video,audio:true});call.answer(s);handleCall(call,s);});}
-function join(){document.getElementById('info').innerText='Connecting...';peer=new Peer();peer.on('open',()=>{conn=peer.connect(ROOM);conn.on('open',showChat);conn.on('data',d=>add(d,'you'));});peer.on('call',async call=>{let s=await navigator.mediaDevices.getUserMedia({video:call.metadata.video,audio:true});call.answer(s);handleCall(call,s);});}
+const ROOM="moise-disasi-v5";let peer,conn;
+function add(t,c){let d=document.createElement('div');d.className='bubble '+c;d.innerText=t;document.getElementById('msgs').appendChild(d);document.getElementById('msgs').scrollTop=9999;}
+function show(){document.getElementById('setup').style.display='none';document.getElementById('chatWrap').style.display='flex';}
+function host(){document.getElementById('info').innerText='Starting...';peer=new Peer(ROOM);peer.on('open',()=>{document.getElementById('info').innerText='Live! Waiting...';});peer.on('connection',c=>{conn=c;show();c.on('data',d=>add(d,'you'));});}
+function join(){document.getElementById('info').innerText='Connecting...';peer=new Peer();peer.on('open',()=>{let c=peer.connect(ROOM);c.on('open',()=>{conn=c;show();});c.on('data',d=>add(d,'you'));});}
 function sendM(){let i=document.getElementById('t');if(!i.value||!conn)return;add(i.value,'me');conn.send(i.value);i.value='';}
-async function makeCall(v){if(!peer)return alert('HOST/JOIN first');try{localStream=await navigator.mediaDevices.getUserMedia({video:v,audio:true});let c=peer.call(ROOM,localStream,{metadata:{video:v}});handleCall(c,localStream);}catch(e){alert(e.message)}}
-function handleCall(c,s){currentCall=c;document.getElementById('callScreen').style.display='flex';document.getElementById('localVideo').srcObject=s;c.on('stream',r=>{document.getElementById('remoteVideo').srcObject=r;});c.on('close',endCall);}
-function endCall(){document.getElementById('callScreen').style.display='none';if(currentCall)currentCall.close();if(localStream)localStream.getTracks().forEach(t=>t.stop());}
 </script>
 </body>
 </html>
